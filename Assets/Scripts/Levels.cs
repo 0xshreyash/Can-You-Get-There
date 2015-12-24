@@ -4,9 +4,8 @@ using System.Collections;
 public class Levels : MonoBehaviour 
 {
 
-	public int levelToLoad;
-	private string loadPrompt;
-	private bool inRange = false; 
+	public int levelToLoad ;
+	private string loadPrompt; 
 	private int completedLevel;
 	private bool canLoadLevel;
 	public GameObject padlock;
@@ -14,15 +13,11 @@ public class Levels : MonoBehaviour
 	void Start()
 	{
 		completedLevel = PlayerPrefs.GetInt ("Level Completed");
-		if (levelToLoad <= completedLevel) {
+		if (levelToLoad <= completedLevel) 
+		{
 			canLoadLevel = true;
-		} else {
-			if (completedLevel < 1 && levelToLoad == 1) {
-				canLoadLevel = true;
-			} else {
-				canLoadLevel = false;
-			}
-		}
+
+		} 
 		if(!canLoadLevel)
 		{
 			Instantiate(padlock, new Vector3(transform.position.x, transform.position.y + 5f, transform.position.z), Quaternion.Euler(-90, 0, 0));
@@ -31,18 +26,26 @@ public class Levels : MonoBehaviour
 
 	void Update()
 	{
-		if (canLoadLevel && Input.GetButtonDown ("Action")) {
-			Application.LoadLevel ("Level -" + levelToLoad.ToString ());
-			
+		if (canLoadLevel == true && Input.GetButtonDown ("Action")) 
+		{
+			if (loadPrompt == "Left Click/Enter to load level 0")
+				Application.LoadLevel ("Main-Menu");
+			else if (loadPrompt == "Left Click/Enter to load level 1")
+				Application.LoadLevel ("Level -1");
+			else if (loadPrompt == "Left Click/Enter to load level 2")
+				Application.LoadLevel ("Level -2");
 		}
 	}
 
 	void OnTriggerStay(Collider other)
 	{
-		inRange = true;
+
 		if (canLoadLevel) {
 			loadPrompt = "Left Click/Enter to load level " + levelToLoad.ToString ();
-		} else {
+
+		} 
+		else 
+		{
 			loadPrompt = "Locked level " + levelToLoad.ToString ();
 		}
 
@@ -50,7 +53,6 @@ public class Levels : MonoBehaviour
 
 	void OnTriggerExit()
 	{
-		inRange = false;
 		loadPrompt = "";
 	}
 
