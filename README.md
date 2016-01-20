@@ -8,7 +8,7 @@ A simple game that built using the Unity Development Engine. In the game the pla
 - Moving enemies
 - Animated spikes built using blender.
 
-#### Scripting Language used: C#
+#### Scripting Language used: 'C#'
 
 #### Game Play: Arrow keys for control. 
 
